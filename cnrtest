@@ -1,0 +1,399 @@
+"""
+test_district_court_icjs.py - Test District Court ICJS Data Availability
+"""
+
+import asyncio
+import os
+import json
+from datetime import datetime
+from dotenv import load_dotenv
+from bharat_courts import DistrictCourtClient
+from bharat_courts.districtcourts.parser import parse_complex_value
+from bharat_courts.captcha.ocr import OCRCaptchaSolver
+
+load_dotenv()
+
+print(f"HF_TOKEN loaded: {'✅' if os.getenv('HF_TOKEN') else '❌ Not found'}")
+
+
+class ManualCaptchaSolver:
+    async def solve(self, image_bytes: bytes) -> str:
+        captcha_path = os.path.abspath("captcha_temp.png")
+        with open(captcha_path, "wb") as f:
+            f.write(image_bytes)
+        print(f"\n🔐 CAPTCHA saved → {captcha_path}")
+        print("   Open File Explorer → your project folder → captcha_temp.png")
+        answer = input("   CAPTCHA answer: ").strip()
+        return answer
+
+
+async def discover_district_courts():
+    """Discover district court structure for a state."""
+    
+    print("\n" + "=" * 70)
+    print("  🔍 Discovering District Courts by State")
+    print("=" * 70)
+    
+    # List of states to test
+    states = [
+        {"code": "8", "name": "Bihar"},
+        {"code": "7", "name": "Delhi"},
+        {"code": "27", "name": "Maharashtra"},
+        {"code": "34", "name": "Tamil Nadu"},
+        {"code": "29", "name": "Karnataka"},
+        {"code": "9", "name": "Uttar Pradesh"},
+        {"code": "32", "name": "Rajasthan"},
+        {"code": "11", "name": "Gujarat"},
+        {"code": "36", "name": "West Bengal"},
+        {"code": "10", "name": "Punjab"},
+    ]
+    
+    results = []
+    
+    try:
+        solver = ManualCaptchaSolver()
+        
+        async with DistrictCourtClient(captcha_solver=solver) as client:
+            for state in states:
+                print(f"\n📋 State: {state['name']} ({state['code']})")
+                print("-" * 40)
+                
+                try:
+                    # List districts for this state
+                    districts = await client.list_districts(state['code'])
+                    
+                    if districts:
+                        print(f"   ✅ Found {len(districts)} districts")
+                        
+                        # Sample first 3 districts
+                        for i, (dist_code, dist_name) in enumerate(districts.items()):
+                            if i >= 3:
+                                print(f"   ... and {len(districts) - 3} more districts")
+                                break
+                            print(f"      - {dist_code}: {dist_name}")
+                            
+                            # Try to list court complexes for this district
+                            try:
+                                complexes = await client.list_complexes(state['code'], dist_code)
+                                if complexes:
+                                    print(f"         ✅ Has {len(complexes)} court complexes")
+                                    # Sample first complex
+                                    for j, (complex_key, complex_name) in enumerate(complexes.items()):
+                                        if j >= 1:
+                                            break
+                                        print(f"            - {complex_key}: {complex_name}")
+                                        
+                                        # Parse complex value
+                                        try:
+                                            code, ests, needs_est = parse_complex_value(complex_key)
+                                            if needs_est and ests:
+                                                print(f"               Est Code: {ests[0]}")
+                                        except:
+                                            pass
+                            except:
+                                pass
+                        
+                        results.append({
+                            "state": state['name'],
+                            "state_code": state['code'],
+                            "districts": len(districts),
+                            "sample_districts": list(districts.items())[:3]
+                        })
+                    else:
+                        print(f"   ❌ No districts found")
+                        
+                except Exception as e:
+                    print(f"   ❌ Error: {e}")
+                
+                await asyncio.sleep(0.5)  # Brief pause between requests
+                
+    except Exception as e:
+        print(f"\n❌ Error: {e}")
+    
+    return results
+
+
+async def search_case_in_district(
+    state_code: str,
+    district_code: str,
+    court_complex_code: str,
+    est_code: str,
+    party_name: str,
+    year: str = "2024"
+):
+    """Search for a case in a district court."""
+    
+    print(f"\n🔍 Searching District Court:")
+    print(f"   State: {state_code}")
+    print(f"   District: {district_code}")
+    print(f"   Court Complex: {court_complex_code}")
+    print(f"   Est Code: {est_code}")
+    print(f"   Party: {party_name}")
+    print(f"   Year: {year}")
+    print("-" * 40)
+    
+    try:
+        solver = ManualCaptchaSolver()
+        
+        async with DistrictCourtClient(captcha_solver=solver) as client:
+            cases = await client.case_status_by_party(
+                state_code=state_code,
+                dist_code=district_code,
+                court_complex_code=court_complex_code,
+                est_code=est_code,
+                party_name=party_name,
+                year=year
+            )
+            
+            if cases:
+                print(f"   ✅ Found {len(cases)} cases")
+                
+                # Show first 3 cases
+                for i, case in enumerate(cases[:3], 1):
+                    print(f"\n   Case {i}:")
+                    print(f"      Case Number: {case.case_number}")
+                    print(f"      Case Type: {case.case_type}")
+                    print(f"      CNR: {case.cnr_number}")
+                    print(f"      Petitioner: {case.petitioner}")
+                    print(f"      Respondent: {case.respondent}")
+                    print(f"      Status: {getattr(case, 'status', 'N/A')}")
+                    
+                    # Check if ICJS data is present
+                    print(f"      --- ICJS Data Check ---")
+                    # Look for ICJS-related fields
+                    icjs_fields = ['fir_number', 'chargesheet_number', 'police_station', 
+                                  'section', 'act', 'accused', 'victim']
+                    
+                    found_icjs = False
+                    for field in icjs_fields:
+                        value = getattr(case, field, None)
+                        if value:
+                            print(f"      ✅ {field}: {value}")
+                            found_icjs = True
+                    
+                    if not found_icjs:
+                        print(f"      ❌ No ICJS data found (sections, FIR, chargesheet)")
+                    
+                    # Check if case has orders with additional info
+                    try:
+                        orders = await client.court_orders(
+                            state_code=state_code,
+                            dist_code=district_code,
+                            court_complex_code=court_complex_code,
+                            est_code=est_code,
+                            case_type=case.case_type,
+                            case_number=case.case_number,
+                            year=year
+                        )
+                        if orders:
+                            print(f"      📄 Orders available: {len(orders)}")
+                            for order in orders[:2]:
+                                print(f"         - {order.order_date}: {order.order_type}")
+                    except:
+                        pass
+                
+                return cases
+            else:
+                print(f"   ❌ No cases found")
+                return []
+                
+    except Exception as e:
+        print(f"   ❌ Error: {e}")
+        return []
+
+
+async def test_specific_district():
+    """Test a specific district court with known data."""
+    
+    print("\n" + "=" * 70)
+    print("  🔍 Testing Specific District Court")
+    print("=" * 70)
+    
+    # Test with Patna District Court (Bihar) - known to have ICJS
+    # You can modify these values based on discovery results
+    
+    # Some known district court codes:
+    # Patna: state_code=8 (Bihar), dist_code=1
+    # Delhi: state_code=7, dist_code=1 (Tis Hazari)
+    # Mumbai: state_code=27, dist_code=1
+    
+    test_cases = [
+        {
+            "state_code": "8",
+            "district_code": "1",
+            "name": "Patna District Court",
+            "party": "Kumar",
+            "year": "2024"
+        },
+        {
+            "state_code": "7",
+            "district_code": "1",
+            "name": "Tis Hazari Court, Delhi",
+            "party": "State",
+            "year": "2024"
+        },
+        {
+            "state_code": "27",
+            "district_code": "1",
+            "name": "Mumbai District Court",
+            "party": "State",
+            "year": "2024"
+        }
+    ]
+    
+    results = []
+    
+    for test in test_cases:
+        print(f"\n📋 Testing: {test['name']}")
+        print("-" * 40)
+        
+        try:
+            solver = ManualCaptchaSolver()
+            
+            async with DistrictCourtClient(captcha_solver=solver) as client:
+                # First, get court complexes for this district
+                complexes = await client.list_complexes(test['state_code'], test['district_code'])
+                
+                if not complexes:
+                    print(f"   ❌ No court complexes found")
+                    continue
+                
+                print(f"   ✅ Found {len(complexes)} court complexes")
+                
+                # Try first few complexes
+                for complex_key, complex_name in list(complexes.items())[:2]:
+                    print(f"\n   🏛️  Complex: {complex_name}")
+                    
+                    try:
+                        code, ests, needs_est = parse_complex_value(complex_key)
+                        est = ests[0] if needs_est and ests else ""
+                        
+                        print(f"      Code: {code}")
+                        print(f"      Est: {est if est else 'N/A'}")
+                        
+                        # Search for cases
+                        cases = await client.case_status_by_party(
+                            state_code=test['state_code'],
+                            dist_code=test['district_code'],
+                            court_complex_code=code,
+                            est_code=est,
+                            party_name=test['party'],
+                            year=test['year']
+                        )
+                        
+                        if cases:
+                            print(f"      ✅ Found {len(cases)} cases")
+                            
+                            # Check first case for ICJS data
+                            case = cases[0]
+                            print(f"\n      📋 Sample Case:")
+                            print(f"         Case Number: {case.case_number}")
+                            print(f"         Type: {case.case_type}")
+                            
+                            # Check for ICJS data
+                            icjs_found = False
+                            for field in ['fir_number', 'chargesheet_number', 'police_station', 
+                                        'section', 'act', 'accused', 'victim']:
+                                value = getattr(case, field, None)
+                                if value:
+                                    print(f"         ✅ ICJS - {field}: {value}")
+                                    icjs_found = True
+                            
+                            if not icjs_found:
+                                print(f"         ❌ No ICJS data found")
+                            
+                            results.append({
+                                "court": test['name'],
+                                "complex": complex_name,
+                                "cases_found": len(cases),
+                                "icjs_available": icjs_found,
+                                "sample_case": {
+                                    "number": case.case_number,
+                                    "type": case.case_type,
+                                    "petitioner": case.petitioner,
+                                    "respondent": case.respondent
+                                }
+                            })
+                            break
+                        else:
+                            print(f"      ❌ No cases found")
+                            
+                    except Exception as e:
+                        print(f"      ❌ Error: {e}")
+                
+                await asyncio.sleep(1)  # Brief pause
+                
+        except Exception as e:
+            print(f"   ❌ Error: {e}")
+    
+    return results
+
+
+async def main():
+    """Main function."""
+    
+    print("\n📋 Choose option:")
+    print("  1. Discover District Courts by State")
+    print("  2. Search a Specific District Court (with ICJS check)")
+    print("  3. Test ICJS data availability in a district court")
+    print("  4. Exit")
+    
+    choice = input("\nEnter choice (1-4): ").strip()
+    
+    if choice == "1":
+        await discover_district_courts()
+    
+    elif choice == "2":
+        # Get state and district from user
+        state_code = input("Enter state code (e.g., 8 for Bihar, 7 for Delhi): ").strip()
+        district_code = input("Enter district code (e.g., 1): ").strip()
+        party_name = input("Enter party name (e.g., Kumar): ").strip()
+        year = input("Enter year (default: 2024): ").strip() or "2024"
+        
+        # First, get court complexes
+        try:
+            solver = ManualCaptchaSolver()
+            async with DistrictCourtClient(captcha_solver=solver) as client:
+                complexes = await client.list_complexes(state_code, district_code)
+                if complexes:
+                    print(f"\n✅ Found {len(complexes)} court complexes:")
+                    for key, name in complexes.items():
+                        print(f"   {key}: {name}")
+                    
+                    complex_key = input("\nEnter complex key: ").strip()
+                    if complex_key:
+                        code, ests, needs_est = parse_complex_value(complex_key)
+                        est = ests[0] if needs_est and ests else ""
+                        
+                        await search_case_in_district(
+                            state_code=state_code,
+                            district_code=district_code,
+                            court_complex_code=code,
+                            est_code=est,
+                            party_name=party_name,
+                            year=year
+                        )
+        except Exception as e:
+            print(f"❌ Error: {e}")
+    
+    elif choice == "3":
+        results = await test_specific_district()
+        if results:
+            print("\n" + "=" * 70)
+            print("  📊 ICJS Data Availability Summary")
+            print("=" * 70)
+            
+            for r in results:
+                print(f"\n   Court: {r['court']}")
+                print(f"      Complex: {r['complex']}")
+                print(f"      Cases Found: {r['cases_found']}")
+                print(f"      ICJS Data Available: {'✅ Yes' if r['icjs_available'] else '❌ No'}")
+                if r.get('sample_case'):
+                    print(f"      Sample Case: {r['sample_case']['number']}")
+    
+    else:
+        print("Exiting...")
+
+
+if __name__ == "__main__":
+    asyncio.run(main())

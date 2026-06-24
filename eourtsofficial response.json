@@ -1,0 +1,72 @@
+
+
+
+
+ eCourtsIndia API Response Structure
+{
+  "cnr": "DLHC010001232024",
+  "case_number": "W.P.(C)-123/2024",
+  "case_type": "W.P.(C)",
+  "status": "Pending",
+  "court_name": "Delhi High Court",
+  "petitioner": "RAJ SINGH",
+  "respondent": "UNION OF INDIA & ORS.",
+  "advocates": {
+    "petitioner_advocate": "Adv. Sharma",
+    "respondent_advocate": "Adv. Mehta"
+  },
+  "judges": ["Hon'ble Mr. Justice Rajesh Kumar"],
+  "hearing_history": [
+    {
+      "date": "2024-01-15",
+      "purpose": "Arguments",
+      "judge": "Hon'ble Mr. Justice Rajesh Kumar"
+    }
+  ],
+  "orders": [
+    {
+      "date": "2024-01-15",
+      "type": "Order",
+      "markdownContent": "Full OCR-cleaned order text...",
+      "pdf_url": "https://..."
+    }
+  ],
+  "ai_analysis": {
+    "summary": "AI-generated summary of the case...",
+    "outcome": "Case pending",
+    "relief": "Not yet granted",
+    "statutory_provisions": ["Section 123 IPC", "Section 456 CrPC"]
+  }
+}
+
+Surepass eCourts API Response Structure
+
+{
+  "cnr_number": "DLHC010001232024",
+  "case_title": "RAJ SINGH vs UNION OF INDIA",
+  "case_type": "Criminal",
+  "status": "Pending",
+  "filing_date": "2024-01-01",
+  "next_hearing_date": "2024-08-15",
+  "next_hearing_purpose": "Final Arguments",
+  "court_name": "Delhi High Court",
+  "district_name": "Delhi",
+  "petitioner": "RAJ SINGH",
+  "respondent": "UNION OF INDIA",
+  "petitioner_advocate": "Adv. Sharma",
+  "respondent_advocate": "Adv. Mehta",
+  "act_details": ["IPC Section 302", "IPC Section 307"],
+  "case_history": [
+    {
+      "hearing_date": "2024-01-15",
+      "order_details": "Case admitted",
+      "purpose": "Initial Hearing"
+    }
+  ],
+  "interim_orders": [
+    {
+      "date": "2024-02-01",
+      "details": "Interim relief granted"
+    }
+  ]
+}

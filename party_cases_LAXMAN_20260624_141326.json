@@ -1,0 +1,79 @@
+[
+  {
+    "court": "Delhi High Court",
+    "court_code": "delhi",
+    "case_number": "282/2019",
+    "case_type": "RFA",
+    "cnr_number": "DLHC010166842019",
+    "petitioner": "LAXMAN SHARMA",
+    "respondent": "JIWAN LATA & ORS",
+    "status": "",
+    "next_hearing": "None"
+  },
+  {
+    "court": "Delhi High Court",
+    "court_code": "delhi",
+    "case_number": "5640/2019",
+    "case_type": "CRL.M.C.",
+    "cnr_number": "DLHC010022972018",
+    "petitioner": "VINOD KUMAR",
+    "respondent": "LAXMAN KUMAR SAGAR",
+    "status": "",
+    "next_hearing": "None"
+  },
+  {
+    "court": "Delhi High Court",
+    "court_code": "delhi",
+    "case_number": "599/2019",
+    "case_type": "MAC.APP.",
+    "cnr_number": "DLHC010242742019",
+    "petitioner": "M/S  THE UNITED INDIA INSURANCE CO LTD",
+    "respondent": "LAXMAN  DASS &  ORS",
+    "status": "",
+    "next_hearing": "None"
+  },
+  {
+    "court": "Delhi High Court",
+    "court_code": "delhi",
+    "case_number": "471/2019",
+    "case_type": "RC.REV.",
+    "cnr_number": "DLHC010330522019",
+    "petitioner": "LAXMAN DASS (DECEASED) THR LRS",
+    "respondent": "KULWANT SINGH & ANR",
+    "status": "",
+    "next_hearing": "None"
+  },
+  {
+    "court": "Delhi High Court",
+    "court_code": "delhi",
+    "case_number": "498/2019",
+    "case_type": "CM(M)",
+    "cnr_number": "DLHC010162952019",
+    "petitioner": "LAXMAN PUBLIC SCHOOL SOCIETY & ANR",
+    "respondent": "MS/ FITJEE LTD",
+    "status": "",
+    "next_hearing": "None"
+  },
+  {
+    "court": "Delhi High Court",
+    "court_code": "delhi",
+    "case_number": "373/2019",
+    "case_type": "CRL.A.",
+    "cnr_number": "DLHC010159582019",
+    "petitioner": "LAXMAN SINGH",
+    "respondent": "STATE",
+    "status": "",
+    "next_hearing": "None"
+  },
+  {
+    "court": "Delhi High Court",
+    "court_code": "delhi",
+    "case_number": "4/2019",
+    "case_type": "CRL.A.",
+    "cnr_number": "DLHC010001592018",
+    "petitioner": "LAXMAN",
+    "respondent": "STATE",
+    "status": "",
+    "next_hearing": "None"
+  }
+]

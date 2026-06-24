@@ -1,0 +1,101 @@
+[
+  {
+    "cnr": "SCIN010004392015",
+    "found": false,
+    "description": "Supreme Court - Advocates-On-Record Association vs Union Of India",
+    "court": "Supreme Court",
+    "error": "No results found"
+  },
+  {
+    "cnr": "SCIN010041742022",
+    "found": false,
+    "description": "Supreme Court - Rajneesh Kumar vs Union Of India",
+    "court": "Supreme Court",
+    "error": "No results found"
+  },
+  {
+    "cnr": "SCIN010130692017",
+    "found": false,
+    "description": "Supreme Court - Vittu vs The State Of Madhya Pradesh",
+    "court": "Supreme Court",
+    "error": "No results found"
+  },
+  {
+    "cnr": "SCIN010188732022",
+    "found": false,
+    "description": "Supreme Court - Govt. Of Nct Of Delhi vs Krishna Rajauria",
+    "court": "Supreme Court",
+    "error": "No results found"
+  },
+  {
+    "cnr": "DLHC011608002012",
+    "found": true,
+    "description": "Delhi HC - Jyotish Thakur vs N.D.M.C.",
+    "court": "Delhi High Court",
+    "case_id": null,
+    "case_number": null,
+    "case_type": "N/A",
+    "petitioner": null,
+    "respondent": null,
+    "status": "N/A",
+    "decision_date": "2013-02-20",
+    "court_name": "N/A",
+    "judge": "N/A",
+    "pdf_available": true
+  },
+  {
+    "cnr": "DLHC010208622025",
+    "found": false,
+    "description": "Delhi HC - Commissioner Of Cgst vs Council Of Architecture",
+    "court": "Delhi High Court",
+    "error": "No results found"
+  },
+  {
+    "cnr": "DLHC010170332024",
+    "found": true,
+    "description": "Delhi HC - A vs The State Nct Of Delhi",
+    "court": "Delhi High Court",
+    "case_id": null,
+    "case_number": null,
+    "case_type": "N/A",
+    "petitioner": null,
+    "respondent": null,
+    "status": "N/A",
+    "decision_date": "2024-08-14",
+    "court_name": "N/A",
+    "judge": "N/A",
+    "pdf_available": true
+  },
+  {
+    "cnr": "DLHC010283082024",
+    "found": true,
+    "description": "Delhi HC - Akash Kumar Pandey vs The State Nct Of Delhi",
+    "court": "Delhi High Court",
+    "case_id": null,
+    "case_number": null,
+    "case_type": "N/A",
+    "petitioner": null,
+    "respondent": null,
+    "status": "N/A",
+    "decision_date": "2024-05-15",
+    "court_name": "N/A",
+    "judge": "N/A",
+    "pdf_available": true
+  },
+  {
+    "cnr": "DLHC010314902024",
+    "found": true,
+    "description": "Delhi HC - Rohit Lohia vs Govt Of Nct Of Delhi",
+    "court": "Delhi High Court",
+    "case_id": null,
+    "case_number": null,
+    "case_type": "N/A",
+    "petitioner": null,
+    "respondent": null,
+    "status": "N/A",
+    "decision_date": "2024-05-24",
+    "court_name": "N/A",
+    "judge": "N/A",
+    "pdf_available": true
+  }
+]

@@ -1,0 +1,90 @@
+🏛️ Delhi High Court – 2026 Cases
+Bail Applications
+Case Number	Party Name	Judge	Year
+BAIL APPLN. 2190/2026	Rakesh Chauhan v. The State (Govt. of NCT of Delhi)	Justice Neena Krishna Bansal	2026
+BAIL APPLN.-2/2026	FARMAN @ MOTA v. THE STATE NCT OF DELHI	-	2026
+BAIL APPLN.-7/2026	AMAN BANSAL v. STATE/ NCT OF DELHI	-	2026
+Criminal Appeals
+Case Number	Party Name	Judge	Year
+CRL.A.-1/2026	XXX v. STATE OF NCT OF DELHI & ORS.	-	2026
+Criminal Appeal No. 238 of 2026	Jitender v. State (NCT of Delhi)	Justice Neena Krishna Bansal	2026
+Criminal Misc. Cases
+Case Number	Party Name	FIR Details	Year
+CRL.M.C.-17/2026	SHUBHAM GOYAL v. GOVT OF NCT OF DELHI & ANR.	Moti Nagar-337/2025	2026
+CRL.M.C.-18/2026	HARI KISHAN SHARMA AND ORS v. THE STATE NCT OF DELHI AND ANR	Dwarka North-768/2022	2026
+CRL.M.C.-30/2026	HIMANSHU SINGHAL AND ORS v. STATE OF NCT OF DELHI & ANR.	Saket-87/2024	2026
+CRL.M.C.-36/2026	DIRECTORATE OF REVENUE INTELLIGENCE v. GANISHT	DRI/DZU/34/ENQ-28/2024/5456	2026
+CRL.M.C.-43/2026	DIRECTORATE OF REVENUE INTELLIGENCE v. ANGEL NANDAWULA	DRI/DZU/34/ENQ-13/2022	2026
+Commercial Matters
+Case Number	Party Name	Judge	Year
+CS(COMM) 344/2026	Toprankers Edtech Solutions Pvt. Ltd. & Ors. v. LPT Edtech Pvt. Ltd. & Ors.	-	2026
+CS(COMM) 236/2026	M/S CARSON OVERSEAS v. M/S MURPHY E RETAIL & ORS.	Justice Jyoti Singh	2026
+CS(COMM) 181/2026	Sporta Technologies Pvt. Ltd. (Dream11) v. "Come Sports"	-	2026
+Writ Petitions
+Case Number	Party Name	Judge	Year
+W.P.(C) 3520/2026	Jaideep Kumar v. Commissioner of Police & Ors.	Justice Anil Kshetarpal & Justice Amit Mahajan	2026
+Criminal Revision
+Case Number	Party Name	FIR Details	Year
+CRL.REV.P.-2/2026	RAM NIWAS v. STATE GOVT. OF NCT OF DELHI & ANR.	Kashmiri Gate Metro Station-15/2024	2026
+🏛️ Delhi District Courts – 2026 Cases
+Rohini District Court
+Case Number	Party Name	Details	Year
+Interim Bail Order	Mohit alias Bholi (Accused in Wrestler Sagar Dhankar Murder Case)	Vacation Judge Sushil Kumar, 3 days interim bail granted	2026
+Dwarka District Court
+Case Number	Party Name	Details	Year
+JJB Appeal	Tarun Murder Case (Minor Accused)	ASJ Rajat Goyal, Set aside JJB order, remanded for fresh age inquiry	2026
+Karkardooma District Court
+Case Number	Party Name	Judge	Year
+CS(COMM) No. 637/25	MANOJ JAIN v. BASANT KUMAR	Ms. Kiran Bansal (District Judge, Commercial Court-02)	2026
+📋 How to Test in Your UI
+High Court Search:
+text
+Select Court Type: High Court
+Party Name: Rakesh Chauhan
+Year: 2026
+Status: Pending
+text
+Select Court Type: High Court
+Party Name: FARMAN @ MOTA
+Year: 2026
+Status: Pending
+text
+Select Court Type: High Court
+Party Name: AMAN BANSAL
+Year: 2026
+Status: Pending
+District Court Search:
+text
+Select Court Type: District Court
+State: Delhi
+District: Central Delhi
+Party Name: Mohit alias Bholi
+Year: 2026
+Status: Pending
+text
+Select Court Type: District Court
+State: Delhi
+District: Dwarka
+Party Name: Tarun Murder
+Year: 2026
+Status: Pending
+text
+Select Court Type: District Court
+State: Delhi
+District: Karkardooma
+Party Name: MANOJ JAIN
+Year: 2025
+Status: Disposed
+💡 Search Tips
+For Criminal Cases: Search with "State" or "State of NCT of Delhi" as the respondent
+
+For Commercial Cases: Search with the company name (e.g., "Carson Overseas")
+
+Use specific party names - The more specific, the better the results
+
+Try different years - Cases from 2025 might also have orders in 2026
+
+Try these searches and let me know what results you get! 🚀
+
+This response is AI-generated, for reference only.
+
